@@ -1,0 +1,51 @@
+*{
+	padding:0px;
+	margin:0px;
+}
+
+body{
+	position:fixed;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+}
+.weui-tab{
+	width: 100%;
+	height: 100%;
+}
+
+/*底部一级菜单*/
+.weui-tabbar .weui-tabbar__item{
+	background: rgb(0, 80, 95);
+}
+
+.weui-tabbar .weui-tabbar__item p.weui-tabbar__label{
+	color: rgb(93, 251, 255);
+}
+
+/*一级菜单高亮*/
+.weui-tabbar .weui-bar__item_on{
+	background: rgb(139, 104, 0);
+}
+
+.weui-tabbar .weui-bar__item_on p.weui-tabbar__label{
+	color: white;
+}
+
+/*二级菜单*/
+.weui-tab__panel .weui-navbar .weui-navbar__item{
+	background: rgb(0, 80, 95);
+	color: rgb(93, 251, 255);
+}
+/*二级菜单高亮*/
+.weui-tab__panel .weui-navbar .weui-bar__item_on{
+	background: rgb(139, 104, 0);
+	color: white;
+}
+
+/*主界面*/
+.weui-tab__panel .container{
+	display: flex;
+	padding: 50px 0px;
+}
