@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalabel=0">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 		<title>余杭良渚BIM+X项目智慧管理</title>
 		<link rel="stylesheet" type="text/css" href="public/stylesheets/weui.min.css">
 		<link rel="stylesheet" type="text/css" href="public/stylesheets/jquery-weui.min.css">
@@ -11,97 +11,99 @@
 	</head>
 	<body>
 		<div class="weui-tab">
-			<div class="weui-tab__panel" id="placePanel">
-				<div class="weui-navbar">
-					<div class="weui-navbar__item weui-bar__item_on">
-						实时监控
-					</div>	
-					<div class="weui-navbar__item">
-						模型对比
+			<div class="weui-tab__bd">
+				<div class="weui-tab-item weui-tab__bd-item--active" id="placePanel">
+					<div class="weui-navbar">
+						<div class="weui-navbar__item">
+							实时监控
+						</div>	
+						<div class="weui-navbar__item">
+							模型对比
+						</div>
+						<div class="weui-navbar__item">
+							数字巡检
+						</div>
+						<div class="weui-navbar__item">
+							物料监控
+						</div>
 					</div>
-					<div class="weui-navbar__item">
-						数字巡检
-					</div>
-					<div class="weui-navbar__item">
-						物料监控
-					</div>
+					<div id="placeContainer" class="container"></div>
 				</div>
-				<div id="placeContainer" class="container"></div>
-			</div>
-			<div class="weui-tab__panel" id="designPanel" style="display:none;">
-				<div class="weui-navbar">
-					<div class="weui-navbar__item weui-bar__item_on">
-						碰撞检查
-					</div>	
-					<div class="weui-navbar__item">
-						净高检查
+				<div class="weui-tab-item" id="designPanel" style="display:none;">
+					<div class="weui-navbar">
+						<div class="weui-navbar__item">
+							碰撞检查
+						</div>	
+						<div class="weui-navbar__item">
+							净高检查
+						</div>
+						<div class="weui-navbar__item">
+							孔洞预留
+						</div>
 					</div>
-					<div class="weui-navbar__item">
-						孔洞预留
-					</div>
+					<div id="designContainer" class="container"></div>
 				</div>
-				<div id="designContainer" class="container"></div>
-			</div>
-			<div class="weui-tab__panel" id="workPanel" style="display:none;">
-				<div class="weui-navbar">
-					<div class="weui-navbar__item weui-bar__item_on">
-						成本
-					</div>	
-					<div class="weui-navbar__item">
-						进度
+				<div class="weui-tab-item" id="workPanel" style="display:none;">
+					<div class="weui-navbar">
+						<div class="weui-navbar__item">
+							成本
+						</div>	
+						<div class="weui-navbar__item">
+							进度
+						</div>
+						<div class="weui-navbar__item">
+							质量
+						</div>
+						<div class="weui-navbar__item">
+							安全
+						</div>
 					</div>
-					<div class="weui-navbar__item">
-						质量
-					</div>
-					<div class="weui-navbar__item">
-						安全
-					</div>
+					<div id="workContainer" class="container"></div>
 				</div>
-				<div id="workContainer" class="container"></div>
-			</div>
-			<div class="weui-tab__panel" id="docPanel" style="display:none;">
-				<div class="weui-navbar">
-					<div class="weui-navbar__item weui-bar__item_on">
-						文库检索
-					</div>	
-					<div class="weui-navbar__item">
-						汇总分类
+				<div class="weui-tab-item" id="docPanel" style="display:none;">
+					<div class="weui-navbar">
+						<div class="weui-navbar__item">
+							文库检索
+						</div>	
+						<div class="weui-navbar__item">
+							汇总分类
+						</div>
+						<div class="weui-navbar__item">
+							资料上传
+						</div>
+						<div class="weui-navbar__item">
+							数据共享
+						</div>
 					</div>
-					<div class="weui-navbar__item">
-						资料上传
-					</div>
-					<div class="weui-navbar__item">
-						数据共享
-					</div>
+					<div id="docContainer" class="container"></div>
 				</div>
-				<div id="docContainer" class="container"></div>
-			</div>
-			<div class="weui-tab__panel" id="managerPanel" style="display:none;">
-				<div class="weui-navbar">
-					<div class="weui-navbar__item weui-bar__item_on">
-						规划报批
-					</div>	
-					<div class="weui-navbar__item">
-						图纸审查
+				<div class="weui-tab-item" id="managerPanel" style="display:none;">
+					<div class="weui-navbar">
+						<div class="weui-navbar__item">
+							规划报批
+						</div>	
+						<div class="weui-navbar__item">
+							图纸审查
+						</div>
+						<div class="weui-navbar__item">
+							概算招标
+						</div>
+						<div class="weui-navbar__item">
+							跟踪审计
+						</div>
+						<div class="weui-navbar__item">
+							质检安检
+						</div>
+						<div class="weui-navbar__item">
+							合同管理
+						</div>
 					</div>
-					<div class="weui-navbar__item">
-						概算招标
-					</div>
-					<div class="weui-navbar__item">
-						跟踪审计
-					</div>
-					<div class="weui-navbar__item">
-						质检安检
-					</div>
-					<div class="weui-navbar__item">
-						合同管理
-					</div>
+					<div id="managerContainer" class="container"></div>
 				</div>
-				<div id="managerContainer" class="container"></div>
 			</div>
 			<div class="weui-tabbar">
-				<a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
-					<img src="public/images/place-active.png" class="weui-tabbar__icon">
+				<a href="javascript:;" class="weui-tabbar__item">
+					<img src="public/images/place.png" class="weui-tabbar__icon">
 					<p class="weui-tabbar__label">智慧工地</p>
 				</a>
 				<a href="javascript:;" class="weui-tabbar__item" ref="#designTab">
@@ -126,7 +128,6 @@
 		<script type="text/javascript" src="public/javascripts/jquery-weui.min.js"></script>
 		<script type="text/javascript" src="public/javascripts/video.min.js"></script>
 		<script type="text/javascript" src="public/javascripts/videojs-ie8.min.js"></script>
-		<script type="text/javascript" src="public/javascripts/YuHang.js"></script>
 		<script type="text/javascript" src="public/javascripts/main.js"></script>
 	</body>
 </html>

@@ -34,18 +34,45 @@ body{
 }
 
 /*二级菜单*/
-.weui-tab__panel .weui-navbar .weui-navbar__item{
+.weui-tab-item .weui-navbar .weui-navbar__item{
 	background: rgb(0, 80, 95);
 	color: rgb(93, 251, 255);
 }
 /*二级菜单高亮*/
-.weui-tab__panel .weui-navbar .weui-bar__item_on{
+.weui-tab-item .weui-navbar .weui-bar__item_on{
 	background: rgb(139, 104, 0);
 	color: white;
 }
 
 /*主界面*/
-.weui-tab__panel .container{
-	display: flex;
-	padding: 50px 0px;
+.weui-tab-item .container{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 50px;
+	bottom: 50px;
+}
+
+.weui-tab-item #docContainer .weui-panel{
+	height:100%;
+	overflow-y: auto;
+}
+
+.weui-tab-item #docContainer .weui-icon-search{
+	position: absolute;
+	top: 15px;
+}
+
+.weui-tab-item #docContainer input#filter{
+	padding-left: 30px;
+}
+
+#filesFound img{
+	width: 30px;
+	height: 30px;
+	overflow-y: auto;
+}
+
+#docContainer .weui-panel:after{
+	border-bottom: none;
 }
