@@ -161,6 +161,7 @@ $(document).ready(function(){
 					event.preventDefault()
 					
 					$('.close-select').trigger('click') // 关闭可能正在显示的选择器
+					$('#filesFound').html('') // 清空上次搜索结果
 
 					// 构造搜索参数
 					var name_filter = $('input#filter').first().val().trim()
