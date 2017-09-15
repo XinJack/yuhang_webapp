@@ -340,9 +340,11 @@ $(document).ready(function(){
 											$.toast('文件上传失败', 'forbidden')
 										}
 										$dom.remove()
+										$('#uploaderInput').val('')
 									}).catch(function(err){
 										console.log(err)
 										$.toast('文件上传失败', 'forbidden')
+										$('#uploaderInput').val('')
 									})
 								}
 							}, {
