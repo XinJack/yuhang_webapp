@@ -59,6 +59,44 @@ $(document).ready(function(){
 
 	function doAction(action){
 		switch(action){
+			case '碰撞检查':
+				getDocument({
+					file_functionAnd: getFileFunction('碰撞检查'),
+					file_type: 'pdf'
+				}, function(err, fileList){
+					if(err){
+						$.alert(err, '错误')
+					}else{
+						$('#designContainer').html('<div id="pdfContainer"></div>')
+						var pdfSrc = 'http://202.121.178.184:4022/resource/文档/pdf/' + fileList[0].file_name
+						//'/public/范本-关键技术报告.pdf'
+						$('#pdfContainer').pdf({
+							source: '/public/范本-关键技术报告.pdf'
+						})	
+						$('#pdfContainer .pdf-tabs').remove()
+						$('#pdfContainer .pdf-toolbar').remove()
+					}
+				})
+				break
+			case '净高检查':
+				getDocument({
+					file_functionAnd: getFileFunction('净高检查'),
+					file_type: 'pdf'
+				}, function(err, fileList){
+					if(err){
+						$.alert(err, '错误')
+					}else{
+						$('#designContainer').html('<div id="pdfContainer"></div>')
+						var pdfSrc = 'http://202.121.178.184:4022/resource/文档/pdf/' + fileList[0].file_name
+						//'/public/范本-关键技术报告.pdf'
+						$('#pdfContainer').pdf({
+							source: '/public/范本-关键技术报告.pdf'
+						})	
+						$('#pdfContainer .pdf-tabs').remove()
+						$('#pdfContainer .pdf-toolbar').remove()
+					}
+				})
+			break
 			case '实时监控':
 				getDocument({
 					file_functionAnd: getFileFunction('实时监控'),
@@ -213,35 +251,96 @@ $(document).ready(function(){
 											<img src="./public/images/video.png">\
 										</div>'
 								}
-								html += '<div class="weui-cell__bd"><p target="'+file.file_id+'">'+file.file_name+'</p></div></div>'
+								html += '<div class="weui-cell__bd"><p target="'+file.file_id+'&'+file.file_type+'">'+file.file_name+'</p></div></div>'
 							})
 							$('#filesFound').html(html)
+
+
 							$('#filesFound p').on('click', function(event){
 								event.preventDefault()
 								var $dom = $(this).parent().parent()
-								var fileId = $(this).attr('target')
-								$.actions({
-									actions: [{
-										text: '下载',
-										className: 'color-primary',
-										onClick: function(){
-											$.toast('暂时无法下载文件')
+								var fileName = $(this).text()
+								var fileId = $(this).attr('target').split('&')[0]
+								var fileType = $(this).attr('target').split('&')[1]
+
+								// 删除文件
+								function _delete(){
+									deleteFile(fileId, function(err){
+										if(err){
+											$.toast(err, 'forbidden')
+										}else{
+											$.toast('文件删除成功')
+											$dom.remove()
 										}
-									},{
-										text: '删除',
-										className: 'color-danger',
-										onClick: function(){
-											deleteFile(fileId, function(err){
-												if(err){
-													$.toast(err, 'forbidden')
-												}else{
-													$.toast('文件删除成功')
-													$dom.remove()
-												}
-											})
+									})
+								}
+
+								// 预览文件
+								function _preview(){
+									$('#popup').popup()
+									if(fileType === 'pdf'){ // pdf
+										html = '<div id="popup_pdfContainer"></div>'
+										$('#popup #popup-main').html(html)
+										var pdfSrc = 'http://202.121.178.184:4022/resource/文档/pdf/' + fileName
+										//'/public/范本-关键技术报告.pdf'
+										$('#popup_pdfContainer').pdf({
+											source: '/public/范本-关键技术报告.pdf'
+										})	
+										$('#popup_pdfContainer .pdf-tabs').remove()
+										$('#popup_pdfContainer .pdf-toolbar').remove()
+									}else if(fileType === 'mp4'){ // 视频
+										$('#popup #popup-main').html('<video id="video" autoplay="autoplay" controls="controls"></video>')
+										$video = $('#popup #popup-main video')
+										$video.width($('body').width())
+										$video.height($('body').height())
+
+										var mediaSrcs = ['http://202.121.178.184:4022/resource/视频/mp4/' + fileName]
+										playVideos($video, mediaSrcs)
+									}else{ // 图片
+										if(fileType === 'jpg'){
+											fileType = 'jpg&jpeg'
 										}
-									}]
-								})
+										var imgSrc = 'http://202.121.178.184:4022/resource/图片/' + fileType + '/' + fileName
+										$('#popup #popup-main').html('<img width="100%" height="auto" src="'+imgSrc+'">')
+									}
+								}
+
+								function _download(){
+									window.open('http://202.121.178.184:4022/YuHang/downloadFile?file_id='+fileId)
+								}
+
+								// 添加文件操作
+								if('bmp/jpg/png/pdf/mp4'.indexOf(fileType) !== -1){
+									$.actions({
+										actions: [{
+											text: '预览',
+											className: 'color-primary',
+											onClick: _preview
+										},
+										{
+											text: '下载',
+											className: 'color-primary',
+											onClick: _download
+										},{
+											text: '删除',
+											className: 'color-danger',
+											onClick: _delete
+										}]
+									})
+								}else{
+									$.actions({
+										actions: [
+										{
+											text: '下载',
+											className: 'color-primary',
+											onClick: _download
+										},{
+											text: '删除',
+											className: 'color-danger',
+											onClick: _delete
+										}]
+									})
+								}
 							})
 						}
 					})
@@ -376,6 +475,13 @@ $(document).ready(function(){
 		}
 	}
 
+	// 关闭弹窗
+	$('#popup .popup-goback').on('click', function(event){
+		event.preventDefault()
+		$('#popup #popup-main').html('')
+		$.closePopup()
+	})
+
 	function getFileByName(files, name){
 		for(var i = 0; i < files.length; ++i){
 			var file = files[i]
@@ -433,9 +539,6 @@ $(document).ready(function(){
 			}else{
 				callback('暂无数据', [])
 			}
-		}).catch(function(err){
-			console.log(err)
-			callback('无法获取文件', [])
 		})
 	}
 
